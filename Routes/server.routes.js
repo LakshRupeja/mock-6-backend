@@ -52,11 +52,11 @@ router.get("/blogs", AuthMiddlware, async (req, res) => {
             queries.category = category
         }
         if (sort) {
-            const Blogs = await Blog.find(queries).sort({ date: sort });
+            const Blogs = await Blog.find(queries).sort({ date: sort }).populate("userId");
             res.json({ Blogs });
         }
         else {
-            const Blogs = await Blog.find(queries);
+            const Blogs = await Blog.find(queries).populate("userId");
             res.json({ Blogs });
         }
 
