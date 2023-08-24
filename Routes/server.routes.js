@@ -124,5 +124,17 @@ router.patch("/blogs/:id/comment", AuthMiddlware, async (req, res) => {
         res.status(404).json({ msg: "Something went wrong", error })
     }
 })
+router.get("/blogs/:id",async(req,res)=>{
+         const {id} = req.params;
+    try{
+        
+     const blog = await Blog.findById(id);
+    res.json({blog})
+    }
+    catch(err){
+        res.status(404).json({ msg: "Something went wrong", error })
+    }
+   
+})
 
 module.exports = router;
