@@ -14,6 +14,7 @@ const AuthMiddlware = async (req, res, next) => {
             return;
         }
         req.body.userId = decoded.userId;
+        req.body.username = isExits.username;
         next();
     } catch (error) {
         res.status(404).json({ msg: "Something went wrong", error })
