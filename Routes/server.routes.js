@@ -41,7 +41,7 @@ router.post("/login", async (req, res) => {
         res.status(404).json({ msg: "Something went wrong", error })
     }
 })
-router.get("/blogs", async (req, res) => {
+router.get("/blogs", AuthMiddlware, async (req, res) => {
     const { title, category, sort } = req.query;
     try {
         const queries = {};
@@ -77,7 +77,7 @@ router.post("/blogs", AuthMiddlware, async (req, res) => {
         res.status(404).json({ msg: "Something went wrong", error })
     }
 })
-router.patch("/blogs/:id", async (req, res) => {
+router.patch("/blogs/:id", AuthMiddlware, async (req, res) => {
     const { id } = req.params;
     try {
         const updateBlog = await Blog.findByIdAndUpdate(id, req.body);
@@ -87,7 +87,7 @@ router.patch("/blogs/:id", async (req, res) => {
         res.status(404).json({ msg: "Something went wrong", error })
     }
 })
-router.delete("/blogs/:id", async (req, res) => {
+router.delete("/blogs/:id", AuthMiddlware, async (req, res) => {
     const { id } = req.params;
     try {
         const delBlog = await Blog.findByIdAndDelete(id);
@@ -97,7 +97,7 @@ router.delete("/blogs/:id", async (req, res) => {
         res.status(404).json({ msg: "Something went wrong", error })
     }
 })
-router.patch("/blogs/:id/like", async (req, res) => {
+router.patch("/blogs/:id/like", AuthMiddlware, async (req, res) => {
     const { id } = req.params;
     try {
         const blog = await Blog.findById(id);
